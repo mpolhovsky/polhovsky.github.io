@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MTC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        
+        .content{
+            max-width: 768px;
+            padding: 12px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+             background-color: rgb(167, 157, 212);
+        }
+
+        header {
+            color:aqua;
+            font-size: 30px;
+            text-transform: uppercase;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header>
+            <a href="html.html">С кайфом домой</a>
+        </header>
+        <h1>MTC</h1>
+
+        <div class="entropy">
+            <h2>Энтропия Шеннона</h2>
+            <img src="Shennon.jpeg">
+            <br>
+            <input id="Text1" type="text" size="3" value="50" style="color: #000000; font-weight: bold;">
+            <input id="Text2" type="text" size="3" value="25" style="color: #000000; font-weight: bold;">
+            <input id="Text3" type="text" size="3" value="12,5" style="color: #000000; font-weight: bold;">
+            <input id="Text4" type="text" size="3" value="12,5" style="color: #000000; font-weight: bold;">
+            <input id="Text5" type="text" size="3" value="0" style="color: #000000; font-weight: bold;">
+            <input id="Text6" type="text" size="3" value="0" style="color: #000000; font-weight: bold;">
+            <input id="Button2" type="button" value="H(X)=" onclick="Go1()">
+            <span id="entropy"></span>
+
+            <script type="text/javascript">
+            
+                function Go1() {
+                    var entr = new Array(6);
+                entr[0] = parseInt(document.getElementById("Text1").value);
+                entr[1] = parseInt(document.getElementById("Text2").value);
+                entr[2] = parseInt(document.getElementById("Text3").value);
+                entr[3] = parseInt(document.getElementById("Text4").value);
+                entr[4] = parseInt(document.getElementById("Text5").value);
+                entr[5] = parseInt(document.getElementById("Text6").value);
+                var n = 0;
+                var s = 0;
+    
+                for (i = 0; i < 6; i++) {
+                    s += entr[i];
+                    if (entr[i] > 0)
+                    {
+                    n++;
+                    } 
+                }
+                var x = 0;
+                var px = new Array(n);
+                var j = 0;
+    
+                for (i = 0; i < 6; i++) {
+                    if (entr[i] > 0) px[j++] = entr[i] / s;
+    
+                }
+    
+                var entropy = 0;
+                for (j = 0; j < n; j++) {
+                    entropy += px[j] * Math.log2(1 / px[j]);
+                }
+                document.getElementById("entropy").innerHTML = entropy;       
+                }
+    
+            </script>
+        </div>
+
+        <div class="approximation">
+            <h2>Аппроксимация Шеннона</h2>
+            <img src="mama_1.jpeg" width="300px">
+            <br>
+            <img src="mama_2.jpeg" width="300px">
+            <br>
+            <textarea rows="2" cols="20" name="usrtxt" wrap="hard">МАМА МЫЛА РА</textarea>
+            <br>
+            <input type=button onClick="Go()" value="Выполнить" size="">
+            <span id="demo">
+            </span>
+
+            <script type="text/javascript">
+                
+            var arr = new Array();
+            function Find(X)
+            {
+                for(j=0; j<arr.length;j++)
+                {
+                    if (arr[j].letters==X)
+                {
+                    arr[j].cols=parseInt(arr[j].cols)+1;
+                    return;
+                }
+                }
+                var car = {letters:X, cols:"1"};
+                arr.push(car);
+                return;
+            }
+
+            function Go()
+            {
+                var str = document.getElementsByName("usrtxt")[0].value;
+                arr= new Array();
+                var ar = str.split("").filter((i) => i !== ' ');
+                for(i=0;i<ar.length-1;i++)
+                {
+                    Find(ar[i]);
+                }
+                for(j=0; j<arr.length; j++)
+                {
+                    document.getElementById("demo").innerHTML +=
+                    "<br><font color='#800000'>"+arr[j].letters+
+                    "</font>-<font color='#2E8B57'>" +
+                    arr[j].cols+"</font><br><br>";
+                }
+            }
+        
+            </script>
+        </div>
+
+    </div>
+</body>
+</html>
